@@ -1,0 +1,35 @@
+{namespace org.plovr}
+
+/**
+ * This is a Soy template for use with the unit test modules.
+ * Assuming that a web-server is running on port 8000 and serving the
+ * client directory, we can use this template to inject CSS into the test
+ * pages so that if we want to render grids as part of the test, they
+ * will get all the right CSS.
+ *
+ * See: http://plovr.com/options.html#test-template for details.
+ *
+ * @param title
+ * @param baseJsUrl
+ * @param testJsUrl
+ */
+{template .test}
+<!doctype html>
+<html>
+<head>
+  <title>{$title} test</title>
+
+  <style>
+    {literal}
+        body { font-size: 12pt; }
+    {/literal}
+  </style>
+</head>
+<body>
+  <script src="http://localhost:8080/underliner.js/lib/jquery-1.8.2.js"></script>
+  <script src="{$baseJsUrl}" ></script>
+  <script src="{$testJsUrl}"></script>
+</div>
+</body>
+</html>
+{/template}
