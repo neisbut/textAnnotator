@@ -75,13 +75,13 @@
                 $select.append($('<option></option>').text(t));
             }
             
-            $('underline').on('click touch', function() {
+            $('#underline').on('click touch', function() {
               u.underlineSelected($select.find(":selected").text(), 'red');
             });
-            $('highlight').on('click touch', function() {
+            $('#highlight').on('click touch', function() {
               u.highlightSelected($select.find(":selected").text(), 'red');
             });
-            $('strike').on('click touch', function() {
+            $('#strike').on('click touch', function() {
               u.strikeSelected($select.find(":selected").text(), 'red');
             });
 
