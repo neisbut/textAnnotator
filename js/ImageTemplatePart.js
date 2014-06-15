@@ -57,8 +57,8 @@ tvs.ImageTemplatePart.prototype.applyToElement = function(element, prevEl,
                 goog.dom.appendChild(td, goog.dom.createDom('div'));
                 break;
             case 'height':
-                td.style.width = rect.height;
-                td.style.maxWidth = rect.height;
+                td.style.width = rect.height + 'px';
+                td.style.maxWidth = td.style.width;
                 break;
             case 'swag':
                 if (!prevTd)
