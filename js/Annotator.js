@@ -26,6 +26,15 @@ tvs.Annotator = function() {
 };
 
 /**
+ * Returns templates list
+ * @return {!Object.<string, tvs.Template>}
+ * @export
+ */
+tvs.Annotator.getTemplates = function() {
+    return tvs.AnnotatorDictionary.svgTemplates;
+};
+
+/**
  * Sets underline options
  * @param {tvs.AnnotateOptions} options
  * @export
@@ -59,12 +68,12 @@ tvs.Annotator.prototype.setStrikeOptions = function(options) {
 };
 
 /**
- * Returns templates for underline
+ * Returns templates list
  * @return {!Object.<string, tvs.Template>}
  * @export
  */
-tvs.Annotator.getTemplates = function() {
-    return tvs.AnnotatorDictionary.svgTemplates;
+tvs.Annotator.prototype.getTemplates = function() {
+    return tvs.Annotator.getTemplates();
 };
 
 /**
