@@ -106,7 +106,7 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
     if (!info)
         return;
 
-    var parent = goog.dom.getParentElement(elemOrEv);
+    var parent = goog.dom.getDocument().body; //goog.dom.getParentElement(elemOrEv);
     var opts = this.options;
 
     var rects = elemOrEv.getClientRects();
@@ -165,8 +165,8 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
         div.style.width = position.width + 'px';
         animatedDiv.style.left = position.left + 'px';
         animatedDiv.style.top = position.top + 'px';
-        var zIndex = goog.style.getComputedStyle(elemOrEv, 'zIndex');
-        animatedDiv.style.zIndex = goog.isNumber(zIndex) ? zIndex - 1 : -1;
+        //var zIndex = goog.style.getComputedStyle(elemOrEv, 'zIndex');
+        //animatedDiv.style.zIndex = goog.isNumber(zIndex) ? zIndex - 1 : -1;
 
         goog.dom.appendChild(parent, animatedDiv);
         goog.dom.appendChild(animatedDiv, div);
