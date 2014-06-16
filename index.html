@@ -71,24 +71,29 @@
         </div>
         
         <script type="text/javascript">
-            var u = new tvs.Annotator();
-            u.annotateDocument();
-            var p = $('#p1')[0];
-            var $select = $('#type');
-
-            for (var t in tvs.Annotator.getTemplates()) {
-                $select.append($('<option></option>').text(t));
-            }
+            $.getScript('https://raw.githubusercontent.com/neisbut/textAnnotator/master/build/annotator.min.js', function() {
+              $.getScript('https://raw.githubusercontent.com/neisbut/textAnnotator/master/js/AnnotatorExtra.js', function() {
+                var u = new tvs.Annotator();
+                u.annotateDocument();
+                var p = $('#p1')[0];
+                var $select = $('#type');
+    
+                for (var t in tvs.Annotator.getTemplates()) {
+                    $select.append($('<option></option>').text(t));
+                }
+                
+                $('#underline').on('click touch', function() {
+                  u.underlineSelected($select.find(":selected").text(), 'red');
+                });
+                $('#highlight').on('click touch', function() {
+                  u.highlightSelected($select.find(":selected").text(), 'red');
+                });
+                $('#strike').on('click touch', function() {
+                  u.strikeSelected($select.find(":selected").text(), 'red');
+                });
+              });
+            });
             
-            $('#underline').on('click touch', function() {
-              u.underlineSelected($select.find(":selected").text(), 'red');
-            });
-            $('#highlight').on('click touch', function() {
-              u.highlightSelected($select.find(":selected").text(), 'red');
-            });
-            $('#strike').on('click touch', function() {
-              u.strikeSelected($select.find(":selected").text(), 'red');
-            });
 
         </script>
         
