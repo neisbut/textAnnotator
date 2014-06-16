@@ -2,6 +2,7 @@ goog.provide('tvs.AnnotatorImpl');
 
 goog.require('goog.Throttle');
 goog.require('goog.style');
+goog.require('tvs.ElementAnnoationInfo');
 goog.require('tvs.IPositioner');
 
 /**
@@ -61,26 +62,22 @@ tvs.AnnotatorImpl.prototype.refreshAllAnnotations = function() {
  * @param {Element} elem
  * @param {string} type
  * @param {string} color
+ * @return {tvs.ElementAnnoationInfo}
  */
 tvs.AnnotatorImpl.prototype.setElementAnnotationInfo =
     function(elem, type, color) {
-        elem['_' + this.id + '_info'] = {
-            type: type,
-            color: color,
-            annotationElements: []
-        };
+        var key = '_' + this.id + '_info';
+        return (elem['_' + this.id + '_info'] = new tvs.ElementAnnoationInfo(
+            elem, key, type, color));
     };
 
 /**
  * @param {Element} elem
- * @return {{
- *      type: string,
- *      color: string,
- *      annotationElements: Array.<Element>
- * }}
+ * @return {tvs.ElementAnnoationInfo}
  */
 tvs.AnnotatorImpl.prototype.getElementAnnotationInfo = function(elem) {
-    return elem['_' + this.id + '_info'];
+    var key = '_' + this.id + '_info';
+    return elem[key];
 };
 
 /**
@@ -88,7 +85,9 @@ tvs.AnnotatorImpl.prototype.getElementAnnotationInfo = function(elem) {
  * @param {Element} elem
  */
 tvs.AnnotatorImpl.prototype.clearElementAnnotationInfo = function(elem) {
-    delete elem['_' + this.id + '_info'];
+    var key = '_' + this.id + '_info';
+    var info = elem[key];
+    info.remove();
 };
 
 /**
@@ -188,20 +187,24 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
  * @param {Array.<Element>|Element} elems
  * @param {string} type
  * @param {string} color
+ * @return {Array.<tvs.ElementAnnoationInfo>}
  */
 tvs.AnnotatorImpl.prototype.annotate = function(elems, type, color) {
     var elems_ = goog.isArray(elems) ? elems : [elems],
         self = this,
-        cssClass = this.getCssClassForAnnotated();
+        cssClass = this.getCssClassForAnnotated(),
+        annotationElements = [];
 
     this.unannotate(elems);
 
     goog.array.forEach(elems_, function(el) {
-        self.setElementAnnotationInfo(el, type, color);
+        annotationElements.push(self.setElementAnnotationInfo(el, type, color));
         goog.dom.classes.enable(el, cssClass, true);
 
         self.refreshAnnotation(el);
     });
+
+    return annotationElements;
 };
 
 /**
@@ -219,8 +222,6 @@ tvs.AnnotatorImpl.prototype.unannotate = function(elems) {
 
         self.clearElementAnnotationInfo(el);
         goog.dom.classes.enable(el, cssClass, false);
-
-        goog.array.forEach(info.annotationElements, goog.dom.removeNode);
     });
 };
 
