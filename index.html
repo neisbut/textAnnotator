@@ -118,13 +118,13 @@ u<span style='color:#808030; '>.</span>underline<span style='color:#808030; '>(<
 u<span style='color:#808030; '>.</span>highlight<span style='color:#808030; '>(</span>element2<span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'brush'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'green'</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 u<span style='color:#808030; '>.</span><span style='color:#800000; font-weight:bold; '>strike</span><span style='color:#808030; '>(</span>element3<span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'dashed'</span><span style='color:#808030; '>,</span> <span style='color:#0000e6; '>'blue'</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 </pre>
-        </div>
+        </div><br/>
         
         <h3>Annotation using attributes</h3>
         <div>
           You can do it like this:
           <pre>
-<span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>Examples of test
+<span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>Examples of text
     <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#274796; '> </span><span style='color:#074726; '>data</span><span style='color:#274796; '>-annotate</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'underline squiggly red'</span><span style='color:#a65700; '>></span>to be underlined<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>, 
     <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#274796; '> </span><span style='color:#074726; '>data</span><span style='color:#274796; '>-annotate</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'highlight brush green'</span><span style='color:#a65700; '>></span>to be highlighted<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>,
     <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#274796; '> </span><span style='color:#074726; '>data</span><span style='color:#274796; '>-annotate</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'strike dashed blue'</span><span style='color:#a65700; '>></span>to be striked<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>
@@ -136,6 +136,24 @@ u<span style='color:#808030; '>.</span><span style='color:#800000; font-weight:b
 u<span style='color:#808030; '>.</span>annotateDocument<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 </pre>
         </div>
+        
+        <h3>Custom templates:</h3>
+        <div>
+          Use JS code to add new templates:
+          <pre>
+tvs<span style='color:#808030; '>.</span>AnnotatorDictionary<span style='color:#808030; '>.</span>svgTemplates<span style='color:#808030; '>[</span><span style='color:#0000e6; '>'custom'</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> tvs<span style='color:#808030; '>.</span>Template<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>new</span> tvs<span style='color:#808030; '>.</span>SvgTemplatePart<span style='color:#808030; '>(</span>
+    <span style='color:#0000e6; '>'&lt;line y2="3" x2="4" y1="3" x1="0" '</span> <span style='color:#808030; '>+</span>
+        <span style='color:#0000e6; '>'stroke-dasharray="2, 2" '</span> <span style='color:#808030; '>+</span>
+        <span style='color:#0000e6; '>'stroke-width="2" stroke="{0}" fill="none"/>'</span><span style='color:#808030; '>,</span> <span style='color:#696969; '>// svg content</span>
+    <span style='color:#008c00; '>4</span><span style='color:#808030; '>,</span>                                                 <span style='color:#696969; '>// width of canvas</span>
+    <span style='color:#008c00; '>5</span><span style='color:#808030; '>,</span>                                                 <span style='color:#696969; '>// height of canvas</span>
+    <span style='color:#0000e6; '>'repeat'</span>                                           <span style='color:#696969; '>// apply method</span>
+<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
+</pre>
+        </div>
+        
+        <h3>More detailed docs...</h3>
+        <div>... are in progress and will be available later!</div>
 
       </section>
     </div>
