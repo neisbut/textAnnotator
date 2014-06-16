@@ -120,6 +120,22 @@ u<span style='color:#808030; '>.</span><span style='color:#800000; font-weight:b
 </pre>
         </div>
         
+        <h3>Annotation using attributes</h3>
+        <div>
+          You can do it like this:
+          <pre style='color:#000000;background:#ffffff;'><html><body style='color:#000000; background:#ffffff; '><pre>
+<span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>Examples of test
+    <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#274796; '> </span><span style='color:#074726; '>data</span><span style='color:#274796; '>-annotate</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'underline squiggly red'</span><span style='color:#a65700; '>></span>to be underlined<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>, 
+    <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#274796; '> </span><span style='color:#074726; '>data</span><span style='color:#274796; '>-annotate</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'highlight brush green'</span><span style='color:#a65700; '>></span>to be highlighted<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>,
+    <span style='color:#a65700; '>&lt;</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#274796; '> </span><span style='color:#074726; '>data</span><span style='color:#274796; '>-annotate</span><span style='color:#808030; '>=</span><span style='color:#0000e6; '>'strike dashed blue'</span><span style='color:#a65700; '>></span>to be striked<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>
+<span style='color:#a65700; '>&lt;/</span><span style='color:#800000; font-weight:bold; '>span</span><span style='color:#a65700; '>></span>
+</pre>
+          Then add to code:
+          <pre>
+<span style='color:#800000; font-weight:bold; '>var</span> u <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> tvs<span style='color:#808030; '>.</span>Annotator<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+u<span style='color:#808030; '>.</span>annotateDocument<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+</pre>
+        </div>
 
       </section>
     </div>
