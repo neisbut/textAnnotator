@@ -43,3 +43,11 @@ tvs.AnnotatorDictionary.svgTemplates['custom'] = new tvs.Template(new tvs.SvgTem
     'repeat'                                           // apply method
 ));
 ```
+
+## Is this doc full?
+
+Sorry, but no. There is many hidden features which is not documented still (hope it will be soon). Not documented features:
+* IE6+ support possible (but not implemented yet)
+* complex templates supported (when template can contain parts with specified width, different and formats inside)
+* Supported apply methods: repeat, stretch, swag, height, * and all possible css values
+* and some others...
