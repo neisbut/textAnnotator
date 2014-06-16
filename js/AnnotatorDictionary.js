@@ -19,10 +19,10 @@ tvs.AnnotatorDictionary.svgTemplates = {
             20, 20, 'repeat'
         )),
     'solid': new tvs.Template(new tvs.SvgTemplatePart(
-            '<line y2="5" x2="20" y1="5" ' +
+            '<line y2="3" x2="5" y1="3" ' +
                 'x1="0" stroke-linecap="round" ' +
-                'stroke-width="5" stroke="{0}" fill="none"/>',
-            20, 20, 'repeat'
+                'stroke-width="2" stroke="{0}" fill="none"/>',
+            5, 5, 'repeat'
         )),
     'dotted': new tvs.Template(new tvs.SvgTemplatePart(
             '<line y2="3" x2="4" y1="3" x1="0" ' +
@@ -31,10 +31,10 @@ tvs.AnnotatorDictionary.svgTemplates = {
             4, 5, 'repeat'
         )),
     'dashed': new tvs.Template(new tvs.SvgTemplatePart(
-            '<line y2="5" x2="20" y1="5" x1="0" ' +
-                'stroke-dasharray="10, 10" ' +
-                'stroke-width="5" stroke="{0}" fill="none"/>',
-            20, 20, 'repeat'
+            '<line y2="3" x2="6" y1="3" x1="0" ' +
+                'stroke-dasharray="4, 2" ' +
+                'stroke-width="2" stroke="{0}" fill="none"/>',
+            6, 5, 'repeat'
         )),
     'double': new tvs.Template(new tvs.SvgTemplatePart(
             '<line y2="1" x2="5" y1="1" ' +

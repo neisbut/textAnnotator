@@ -17,7 +17,8 @@ tvs.Annotator = function() {
     this.highlighter_ = new tvs.AnnotatorImpl(
         'highlighter',
         tvs.Annotator.getTemplates(),
-        tvs.AnnotatorCore.highlightPositioner);
+        tvs.AnnotatorCore.highlightPositioner,
+        {opacity: 0.45});
 
     this.striker_ = new tvs.AnnotatorImpl(
         'striker',

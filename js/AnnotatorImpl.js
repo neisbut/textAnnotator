@@ -20,7 +20,8 @@ tvs.AnnotatorImpl = function(id, templates, positioner, options) {
 
     // default options
     this.options = {
-        'height': 5
+        'height': 5,
+        'opacity': 0.9
     };
     this.setOptions(options || this.options);
 
@@ -105,7 +106,7 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
     if (!info)
         return;
 
-    var parent = goog.dom.getDocument().body; //goog.dom.getParentElement(elemOrEv);
+    var parent = goog.dom.getDocument().body;
     var opts = this.options;
 
     var rects = elemOrEv.getClientRects();
@@ -164,6 +165,7 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
         div.style.width = position.width + 'px';
         animatedDiv.style.left = position.left + 'px';
         animatedDiv.style.top = position.top + 'px';
+        animatedDiv.style.opacity = this.options.opacity;
         //var zIndex = goog.style.getComputedStyle(elemOrEv, 'zIndex');
         //animatedDiv.style.zIndex = goog.isNumber(zIndex) ? zIndex - 1 : -1;
 

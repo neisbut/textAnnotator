@@ -4,7 +4,10 @@ goog.require('goog.dom');
 
 
 /**
- * @typedef {{height: number}}
+ * @typedef {{
+ *     height: (number|undefined),
+ *     opacity: (number|undefined)
+ * }}
  */
 tvs.AnnotateOptions;
 
