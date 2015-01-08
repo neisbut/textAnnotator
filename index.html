@@ -92,6 +92,11 @@
                 $('#strike').on('click touch', function() {
                   u.strikeSelected($select.find(":selected").text(), 'red');
                 });
+                
+                $(document).on('click touch', '.tvs-annotated-text, .tvs-annotate-element', function(el) {
+                  u.unannotateElement(this);
+                });
+                
               });
             });
             
