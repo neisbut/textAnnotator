@@ -1,18 +1,21 @@
-goog.provide('tvs.ElementAnnoationInfo');
+goog.provide('tvs.ElementAnnotationInfo');
 
 /**
  * @constructor
- * @param {Element} el
+ * @param {Element} el Current element (one of elements)
+ * @param {Array.<Element>} elements All elements which
+ *   were annotated simultaneously
  * @param {string} propName
  * @param {string} type
  * @param {string} color
  */
-tvs.ElementAnnoationInfo = function(el, propName, type, color) {
+tvs.ElementAnnotationInfo = function(el, elements, propName, type, color) {
     this.type = type;
     this.color = color;
     this.elPropName = propName;
     this.annotationElements = [];
-    this.annotetedElement = el;
+    this.annotatedElement = el;
+    this.annotatedElements = elements;
     el[propName] = this;
 };
 
@@ -20,8 +23,9 @@ tvs.ElementAnnoationInfo = function(el, propName, type, color) {
  * Removes annotation from element
  * @export
  */
-tvs.ElementAnnoationInfo.prototype.remove = function() {
+tvs.ElementAnnotationInfo.prototype.remove = function() {
     goog.array.forEach(this.annotationElements, goog.dom.removeNode);
-    delete this.annotetedElement[this.elPropName];
-    this.annotetedElement = null;
+    delete this.annotatedElement[this.elPropName];
+    this.annotatedElement = null;
+    this.annotatedElements = null;
 };

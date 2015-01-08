@@ -2,7 +2,7 @@
 .tvs-annotate-element {
 	transition: width 0.5s ease-in-out;
 	/*-webkit-transition: width 0.5s ease-in-out; */
-	
+	pointer-events: none;
 	overflow: hidden;
 }
 

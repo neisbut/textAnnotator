@@ -121,7 +121,7 @@ tvs.Annotator.prototype.getTemplates = function() {
  * @param {string} type
  * @param {string} color
  * @export
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.underline = function(elems, type, color) {
     return this.underliner_.annotate(elems, type, color);
@@ -132,7 +132,7 @@ tvs.Annotator.prototype.underline = function(elems, type, color) {
  * @param {string} type
  * @param {string} color
  * @export
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.highlight = function(elems, type, color) {
     return this.highlighter_.annotate(elems, type, color);
@@ -143,7 +143,7 @@ tvs.Annotator.prototype.highlight = function(elems, type, color) {
  * @param {string} type
  * @param {string} color
  * @export
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.strike = function(elems, type, color) {
     return this.striker_.annotate(elems, type, color);
@@ -153,7 +153,7 @@ tvs.Annotator.prototype.strike = function(elems, type, color) {
  * @param {string} method
  * @param {string} type
  * @param {string} color
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.annotateSelected = function(method, type, color) {
 
@@ -170,9 +170,9 @@ tvs.Annotator.prototype.annotateSelected = function(method, type, color) {
             'tvs-annotated-text');
     }
     this.rangyClassApplier.applyToSelection();
+
     // array for listing annotated elements and for preventing multiple calls
     var annotated = [];
-    var annotationElements = [];
 
     goog.array.forEach(sel.getAllRanges(), function(range) {
         goog.array.forEach(range.getNodes(), function(node) {
@@ -180,18 +180,45 @@ tvs.Annotator.prototype.annotateSelected = function(method, type, color) {
             if (el && goog.dom.classes.has(el, 'tvs-annotated-text') &&
                 !goog.array.contains(annotated, el)) {
                 annotated.push(el);
-                annotationElements.push(func.apply(self, [el, type, color]));
             }
         });
     });
-    return annotationElements;
+
+    // clean up resources
+    rangy.getSelection().detach();
+
+    return goog.array.flatten(func.apply(self, [annotated, type, color]));
+};
+
+/**
+ * unannotate elememt
+ * @param {Element} el
+ * @export
+ */
+tvs.Annotator.prototype.unannotateElement = function(el) {
+    var toUnwrap = [],
+        self = this;
+
+    toUnwrap = goog.array.concat(toUnwrap, this.underliner_.unannotate(el));
+    toUnwrap = goog.array.concat(toUnwrap, this.highlighter_.unannotate(el));
+    toUnwrap = goog.array.concat(toUnwrap, this.striker_.unannotate(el));
+
+    goog.array.forEach(toUnwrap, function(el) {
+        if (!goog.dom.getParentElement(el))
+            return;
+
+        var range = rangy.createRange();
+        range.selectNode(el);
+        self.rangyClassApplier.undoToRange(range);
+    });
+
 };
 
 /**
  * @param {string} type
  * @param {string} color
  * @export
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.underlineSelected = function(type, color) {
     return this.annotateSelected('underline', type, color);
@@ -201,7 +228,7 @@ tvs.Annotator.prototype.underlineSelected = function(type, color) {
  * @param {string} type
  * @param {string} color
  * @export
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.highlightSelected = function(type, color) {
     return this.annotateSelected('highlight', type, color);
@@ -211,7 +238,7 @@ tvs.Annotator.prototype.highlightSelected = function(type, color) {
  * @param {string} type
  * @param {string} color
  * @export
- * @return {Array.<tvs.ElementAnnoationInfo>}
+ * @return {Array.<tvs.ElementAnnotationInfo>}
  */
 tvs.Annotator.prototype.strikeSelected = function(type, color) {
     return this.annotateSelected('strike', type, color);

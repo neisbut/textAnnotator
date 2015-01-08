@@ -51,6 +51,11 @@ classApplier.prototype.applyToSelection = function () {};
 classApplier.prototype.getSelfOrAncestorWithClass = function () {};
 
 /**
+ * Removes this CssClassApplier's CSS class from all text within the specified Rangy range.
+ */
+classApplier.prototype.undoToRange = function () {};
+
+/**
  * creates class applier
  * @return {classApplier}
  */
