@@ -11,7 +11,7 @@ goog.require('tvs.ImageTemplatePart');
 tvs.Template = function(parts) {
 
     this.templateParts_ = goog.isString(parts) ?
-        [new tvs.ImageTemplatePart(parts, 'repeat')] :
+        [new tvs.ImageTemplatePart(parts, '*', 'repeat')] :
         (goog.isArray(parts) ? parts : [parts]);
 
 };

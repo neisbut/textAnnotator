@@ -10,11 +10,12 @@ goog.require('tvs.ImageTemplatePart');
  * @param {number} canvasWidth
  * @param {number} canvasHeight
  * @param {string} templWidth
+ * @param {string} drawMode
  * @extends {tvs.ImageTemplatePart}
  * @export
  */
 tvs.SvgTemplatePart = function(
-    svgContent, canvasWidth, canvasHeight, templWidth) {
+    svgContent, canvasWidth, canvasHeight, templWidth, drawMode) {
 
     var content = tvs.AnnotatorCore.formatString(
         '<svg width="{0}" height="{1}" xmlns="http://www.w3.org/2000/svg">' +
@@ -22,7 +23,7 @@ tvs.SvgTemplatePart = function(
         [canvasWidth, canvasHeight, svgContent]
     );
 
-    goog.base(this, content, templWidth);
+    goog.base(this, content, templWidth, drawMode);
 
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
@@ -45,16 +46,22 @@ tvs.SvgTemplatePart.prototype.getBackground = function(color) {
  * @override
  */
 tvs.SvgTemplatePart.prototype.resizeElement = function(element, rect) {
-    if (this.width === 'stretch') {
-        var bounds = goog.style.getBounds(element);
+    if (this.drawMode === 'stretch') {
+
         var img = goog.dom.getElementsByTagNameAndClass(
             'img', null, element)[0];
 
-        img.style.transform = 'scaleX(' + (rect.width / this.canvasWidth) +
+        // to get the real TD size we need to hide image element first
+        img.style.display = 'none';
+        var bounds = goog.style.getBounds(element);
+
+        img.style.transform = 'scaleX(' + (bounds.width / this.canvasWidth) +
             ') scaleY(' + (rect.height / this.canvasHeight) + ')';
 
         img.style.webkitTransform = img.style.msTransform =
             img.style.transform;
+
+        img.style.display = '';
     }
 };
 

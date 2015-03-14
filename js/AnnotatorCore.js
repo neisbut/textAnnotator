@@ -50,7 +50,7 @@ tvs.AnnotatorCore.underlinePositioner = /** @type {!tvs.IPositioner} */ ({
     /**
      * @param {Object} elementRect
      * @param {number} annotationHeight
-     * @return {Object}
+     * @return {{left: number, top: number, width: number, height: number}}
      */
     getPosition: function(elementRect, annotationHeight) {
         return {

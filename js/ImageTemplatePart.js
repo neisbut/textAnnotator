@@ -5,15 +5,17 @@ goog.require('tvs.TemplatePart');
 /**
  * @constructor
  * @param {string} content
- * @param {string} width Allowed values: *, repeat, stretch, [\d]px
+ * @param {string} width Allowed values: *, height, [\d]px
+ * @param {string} drawMode allowed values: repeat, stretch
  * @extends {tvs.TemplatePart}
  * @export
  */
-tvs.ImageTemplatePart = function(content, width) {
+tvs.ImageTemplatePart = function(content, width, drawMode) {
     goog.base(this);
 
     this.content = content;
     this.width = width;
+    this.drawMode = drawMode || 'repeat';
 };
 goog.inherits(tvs.ImageTemplatePart, tvs.TemplatePart);
 
@@ -51,13 +53,8 @@ tvs.ImageTemplatePart.prototype.applyToElement = function(element, prevEl,
             case '*':
                 td.style.width = starCost + '%';
                 break;
-            case 'repeat':
-                td.style.width = 'auto';
-                // mobiles demand something inside of td with auto width
-                goog.dom.appendChild(td, goog.dom.createDom('div'));
-                break;
             case 'height':
-                td.style.width = rect.height + 'px';
+                td.style.width = td.style.minWidth = rect.height + 'px';
                 td.style.maxWidth = td.style.width;
                 break;
             case 'swag':
@@ -78,18 +75,29 @@ tvs.ImageTemplatePart.prototype.applyToElement = function(element, prevEl,
                 goog.dom.appendChild(prevTd, img);
                 bgIsSet = true;
                 break;
-            case 'stretch':
-                var img = goog.dom.createDom('img');
-                img.src = this.getBackground(color);
-                goog.dom.appendChild(td, img);
-                img.removeAttribute('width');
-                img.removeAttribute('height');
-                bgIsSet = true;
-                break;
             default:
-                td.style.width = goog.isNumber(this.width) ?
+                td.style.minWidth = td.style.width = goog.isNumber(this.width) ?
                     this.width + 'px' : this.width;
                 break;
+        }
+
+        if (this.drawMode === 'stretch') {
+            var img = goog.dom.createDom('img');
+                goog.dom.appendChild(td, img);
+                var self = this;
+                // since we need to know actual size of the TD then we should
+                // call resize just after annotation alement is added to page
+                setTimeout(function() {
+                    self.resizeElement(td, annotationRect);
+                    img.src = self.getBackground(color);
+                    img.removeAttribute('width');
+                    img.removeAttribute('height');
+                }, 10);
+                bgIsSet = true;
+        }
+        if (goog.dom.getChildren(td).length === 0) {
+            // mobiles demand something inside of td with auto width
+            goog.dom.appendChild(td, goog.dom.createDom('div'));
         }
 
         if (!bgIsSet) {

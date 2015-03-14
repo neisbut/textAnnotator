@@ -50,7 +50,7 @@ tvs.AnnotatorImpl.prototype.getCssClassForAnnotated = function() {
 };
 
 /**
- * Refreshes all underlines on a page
+ * Refreshes all annotations of a perticular type on a page
  */
 tvs.AnnotatorImpl.prototype.refreshAllAnnotations = function() {
     var elems = goog.dom.getElementsByClass(this.getCssClassForAnnotated());
@@ -140,6 +140,8 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
         s.width = position.width + 'px';
         s.left = position.left + 'px';
         s.top = position.top + 'px';
+        goog.dom.getChildren(
+            info.annotationElements[i])[0].style.width = s.width;
 
         this.resizeTemplate(template, info.annotationElements[i], position);
     }
@@ -165,6 +167,7 @@ tvs.AnnotatorImpl.prototype.refreshAnnotation = function(elemOrEv) {
         animatedDiv.style.position = 'absolute';
 
         var div = goog.dom.createDom('div');
+        goog.dom.classes.add(div, 'tvs-wrap-div');
         var position = this.positioner.getPosition(r, this.options.height);
 
         var table = this.templateToElement(template, info.color, position);
@@ -283,7 +286,7 @@ tvs.AnnotatorImpl.prototype.templateToElement = function(t, color, rect) {
             countStars++;
     });
 
-    var starCost = countStars * 100 / parts.length,
+    var starCost = countStars > 0 ? 100.0 / countStars : 100,
         prevTd;
 
     goog.array.forEach(parts, function(p, partIndex) {
