@@ -83,17 +83,17 @@ tvs.ImageTemplatePart.prototype.applyToElement = function(element, prevEl,
 
         if (this.drawMode === 'stretch') {
             var img = goog.dom.createDom('img');
-                goog.dom.appendChild(td, img);
-                var self = this;
-                // since we need to know actual size of the TD then we should
-                // call resize just after annotation alement is added to page
-                setTimeout(function() {
-                    self.resizeElement(td, annotationRect);
-                    img.src = self.getBackground(color);
-                    img.removeAttribute('width');
-                    img.removeAttribute('height');
-                }, 10);
-                bgIsSet = true;
+            goog.dom.appendChild(td, img);
+            var self = this;
+            // since we need to know actual size of the TD then we should
+            // call resize just after annotation alement is added to page
+            setTimeout(function() {
+                self.resizeElement(td, annotationRect);
+                img.src = self.getBackground(color);
+                img.removeAttribute('width');
+                img.removeAttribute('height');
+            }, 10);
+            bgIsSet = true;
         }
         if (goog.dom.getChildren(td).length === 0) {
             // mobiles demand something inside of td with auto width

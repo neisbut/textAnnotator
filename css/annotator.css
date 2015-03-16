@@ -19,12 +19,13 @@
 	padding: 0;
 	height: 100%;
 	border: none;
+	position: relative;
 }
 
 .tvs-annotate-element table td img {
 	transform-origin: 0 0;
 	-webkit-transform-origin: 0 0;
-	/*position: absolute;*/
+	position: absolute;
 	left: 0;
 	top: 0;
 	border: none;
