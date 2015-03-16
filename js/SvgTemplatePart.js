@@ -61,6 +61,9 @@ tvs.SvgTemplatePart.prototype.resizeElement = function(element, rect) {
         img.style.webkitTransform = img.style.msTransform =
             img.style.transform;
 
+        img.style.webkitTransformOrigin = img.style.msTransformOrigin =
+            img.style.transformOrigin = '0';
+
         img.style.display = '';
     }
 };
