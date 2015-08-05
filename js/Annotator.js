@@ -166,7 +166,7 @@ tvs.Annotator.prototype.annotateSelected = function(method, type, color) {
 
     if (!this.rangyClassApplier) {
         rangy.init();
-        this.rangyClassApplier = rangy.createCssClassApplier(
+        this.rangyClassApplier = rangy.createClassApplier(
             'tvs-annotated-text');
     }
     this.rangyClassApplier.applyToSelection();

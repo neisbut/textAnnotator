@@ -59,4 +59,4 @@ classApplier.prototype.undoToRange = function () {};
  * creates class applier
  * @return {classApplier}
  */
-rangy.prototype.createCssClassApplier = function () {};
+rangy.prototype.createClassApplier = function () {};
