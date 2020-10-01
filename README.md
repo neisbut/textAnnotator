@@ -1,10 +1,10 @@
-## textAnnotator
+## TextAnnotator
 
-Small and simple JS tool for making powerful underline, highlight and strike text annotations.
+Small and simple JS tool for making powerful underline , highlight and strike text annotations.
 
 See live demo at the [pages](http://neisbut.github.io/textAnnotator/)
 
-## Quick Examples
+## Quick Examples :-
 
 ### Annotate specific element:
 ```javascript
@@ -15,7 +15,7 @@ u.strike(element3, 'dashed', 'blue');
 ```
 
 
-### Annotation using attributes
+### Annotation using attributes :-
 
 ```html
 <span>Examples of text
